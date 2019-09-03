@@ -3,15 +3,17 @@
 
 //reset
 * {
-  margin:0;
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none; //禁止高亮
+  
 }
 
 html {
   font-size: 13px;
   background: rgb(233, 233, 233);
+
 }
 
 boby {
@@ -27,6 +29,8 @@ a {
   color: #999;
 }
 
+//color
+//colorKey遍历里面键值，$color里面的颜色值
 @each $colorKey,
 $color in $colors {
   .text-#{$colorKey} {
@@ -38,20 +42,17 @@ $color in $colors {
   }
 }
 
-//colorKey遍历里面键值，$color里面的颜色值
-
 //文字对齐
 @each $var in (left, center, right) {
   .text-#{$var} {
-    text-align: $var !important;
+    text-align: $var;
   }
 }
-
 
 @each $sizeKey,
 $size in $font-sizes {
   .fs-#{$sizeKey} {
-    font-size: $size * $base-font-size
+    font-size: $size * $base-font-size;
   }
 }
 
@@ -68,7 +69,7 @@ $size in $font-sizes {
   flex-wrap: wrap;
 }
 
-
+//justify-content
 @each $key,
 $value in $flex-jc {
   .jc-#{$key} {
@@ -76,9 +77,10 @@ $value in $flex-jc {
   }
 }
 
+//align-items
 @each $key,
 $value in $flex-ai {
-  .jc-#{$key} {
+  .ai-#{$key} {
     align-items: $value;
   }
 }
@@ -91,7 +93,7 @@ $value in $flex-ai {
   flex-grow: 1;
 }
 
-//间距
+//间距 margin padding 
 // m-0, mx-0
 @each $typeKey,
 $type in $spacing-types {
@@ -131,6 +133,7 @@ $type in $spacing-types {
   }
 }
 
+//button
 .btn {
   border: none;
   border-radius: 0.1538rem;
@@ -138,13 +141,26 @@ $type in $spacing-types {
   padding: 0.15rem 0.6rem
 }
 
+//nav
 .nav {
+  display: flex;
   .nav-item {
     border: 3px solid transparent;
     padding-bottom: 0.2rem;
 
     &.active {
-      border-bottom: 3px solid #fff;
+      color: map-get($colors, 'primary');
+      border-bottom-color: map-get($colors, 'primary');
+    }
+  }
+
+  &.nav-inverse {//反色样式
+    .nav-item {
+      color: map-get($colors, 'white');
+
+      &.active {
+        border-bottom-color: map-get($colors, 'white');
+      }
     }
   }
 }
@@ -178,11 +194,18 @@ $type in $spacing-types {
 }
 
 //阿里icon
-.iconfont{
-  font-family:"iconfont" !important;
-  font-size:16px;
-  font-style:normal;
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.2px;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.text-ellipsis {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
